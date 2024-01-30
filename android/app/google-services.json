@@ -1,0 +1,86 @@
+{
+  "project_info": {
+    "project_number": "567202365649",
+    "project_id": "intelligent-pharmacy-1830d",
+    "storage_bucket": "intelligent-pharmacy-1830d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:567202365649:android:2cd2a7664b446189b585f0",
+        "android_client_info": {
+          "package_name": "com.example.intelligent_pharmacy.intelligent_pharmacy"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCwHkvzkgXuR1FQJhRJW3POJNyxbTXrMDw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:567202365649:android:4ae0b71adda7ac1eb585f0",
+        "android_client_info": {
+          "package_name": "com.example.ip_admin"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCwHkvzkgXuR1FQJhRJW3POJNyxbTXrMDw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:567202365649:android:b17cef1880c3c3ceb585f0",
+        "android_client_info": {
+          "package_name": "com.example.ip_pharmacy_admin"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCwHkvzkgXuR1FQJhRJW3POJNyxbTXrMDw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:567202365649:android:4bce3bf25e2bc6a4b585f0",
+        "android_client_info": {
+          "package_name": "com.example.ip_pharmcay_admin"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCwHkvzkgXuR1FQJhRJW3POJNyxbTXrMDw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
