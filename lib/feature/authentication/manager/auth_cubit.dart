@@ -43,42 +43,46 @@ class AuthCubit extends Cubit<AuthState> {
     await FirebaseAuth.instance
         .signInWithEmailAndPassword(email: 'ibrahimmedhat112@gmail.com', password: '123456')
         .then((value) async {
-      var pharmacy = FirebaseFirestore.instance.collection('pharmacies').doc('2Cy9k9b8noU4Abj5Lgip');
-      var pharmacyData = await pharmacy.get();
-
-      if (pharmacyData.data() != null) {
-        List<CategoryModel> categories = [];
-        List<ProductsModel> products = [];
-        List<OffersModel> offers = [];
-        for (var category in pharmacyData.data()!['categories']) {
-          categories.add(CategoryModel.fromJson(category));
-        }
-        await pharmacy.collection('products').get().then((value) {
-          for (var element in value.docs) {
-            products.add(ProductsModel.fromJson(element.data()));
-          }
-        });
-        await pharmacy.collection('offers').get().then((value) {
-          for (var element in value.docs) {
-            offers.add(OffersModel.fromJson(element.data()));
-          }
-        });
-        Constants.pharmacyModel = PharmacyModel.fromJson(
-          json: pharmacyData.data(),
-          categories: categories,
-          offers: offers,
-          products: products,
-        );
-        emit(LoginSuccessfully());
-        onSuccess.call();
-      } else {
-        emit(LoginError());
-        showToast('Not a Pharmacy');
-      }
+      await getPharmacy(onSuccess);
     }).catchError((onError) {
       emit(LoginError());
       Fluttertoast.showToast(msg: onError.message.toString());
     });
+  }
+
+  Future<void> getPharmacy(VoidCallback onSuccess) async {
+    var pharmacy = FirebaseFirestore.instance.collection('pharmacies').doc('2Cy9k9b8noU4Abj5Lgip');
+    var pharmacyData = await pharmacy.get();
+
+    if (pharmacyData.data() != null) {
+      List<CategoryModel> categories = [];
+      List<ProductsModel> products = [];
+      List<OffersModel> offers = [];
+      for (var category in pharmacyData.data()!['categories']) {
+        categories.add(CategoryModel.fromJson(category));
+      }
+      await pharmacy.collection('products').get().then((value) {
+        for (var element in value.docs) {
+          products.add(ProductsModel.fromJson(element.data()));
+        }
+      });
+      await pharmacy.collection('offers').get().then((value) {
+        for (var element in value.docs) {
+          offers.add(OffersModel.fromJson(element.data()));
+        }
+      });
+      Constants.pharmacyModel = PharmacyModel.fromJson(
+        json: pharmacyData.data(),
+        categories: categories,
+        offers: offers,
+        products: products,
+      );
+      emit(LoginSuccessfully());
+      onSuccess.call();
+    } else {
+      emit(LoginError());
+      showToast('Not a Pharmacy');
+    }
   }
 
   void suffixPressed() {

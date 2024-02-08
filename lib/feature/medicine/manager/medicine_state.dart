@@ -22,3 +22,9 @@ class GetAllOffersLoading extends MedicineState {}
 class GetAllOffersSuccessfully extends MedicineState {}
 
 class GetAllOffersError extends MedicineState {}
+
+class GetAllCategoriesLoading extends MedicineState {}
+
+class GetAllCategoriesSuccessfully extends MedicineState {}
+
+class GetAllCategoriesError extends MedicineState {}

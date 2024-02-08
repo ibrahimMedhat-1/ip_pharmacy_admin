@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ip_pharmacy_admin/feature/authentication/view/widgets/auth_button.dart';
 
-import '../../../shared/utils/constants.dart';
 import '../../medicine/view/medicine_page.dart';
 import '../manager/auth_cubit.dart';
 import 'widgets/custom_text_form.dart';
@@ -92,8 +91,7 @@ class LoginPage extends StatelessWidget {
                                             Navigator.pushReplacement(
                                                 context,
                                                 MaterialPageRoute(
-                                                    builder: (builder) =>
-                                                        MedicinePage(pharmacyModel: Constants.pharmacyModel!)));
+                                                    builder: (builder) => const MedicinePage()));
                                           });
                                         }
                                       },

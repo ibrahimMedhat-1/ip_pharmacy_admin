@@ -8,13 +8,16 @@ class ProductsModel {
   String? effectiveMaterial;
   String? pharmacyId;
 
-  ProductsModel(
-    this.tag,
-    this.image,
-    this.name,
-    this.price,
-    this.description,
-  );
+  ProductsModel({
+    required this.tag,
+    required this.image,
+    required this.name,
+    required this.price,
+    required this.description,
+    required this.category,
+    required this.effectiveMaterial,
+    required this.pharmacyId,
+  });
 
   ProductsModel.fromJson(Map<String, dynamic>? json) {
     tag = json!['id'];
@@ -30,6 +33,7 @@ class ProductsModel {
   Map<String, dynamic> toMap() => {
         'id': tag,
         'image': image,
+        'name': name,
         'price': price,
         'description': description,
         'category': category,

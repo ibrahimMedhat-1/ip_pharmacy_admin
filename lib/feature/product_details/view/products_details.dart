@@ -4,10 +4,9 @@ import 'package:ip_pharmacy_admin/feature/product_details/view/widgets/top_image
 import '../../../models/product_model.dart';
 
 class ProductsDetails extends StatelessWidget {
-  final String tag;
   final ProductsModel productsModel;
 
-  const ProductsDetails({super.key, required this.tag, required this.productsModel});
+  const ProductsDetails({super.key, required this.productsModel});
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +25,7 @@ class ProductsDetails extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      TopImageWidget(tag: tag, image: productsModel.image!),
+                      TopImageWidget(tag: productsModel.tag!, image: productsModel.image!),
                       Text(
                         productsModel.name!,
                         style: Theme.of(context).textTheme.titleLarge!.copyWith(

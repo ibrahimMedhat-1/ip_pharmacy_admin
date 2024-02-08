@@ -8,7 +8,7 @@ import 'package:ip_pharmacy_admin/feature/categories_page/view/widgets/product_i
 import '../../../models/offers_model.dart';
 import '../../../models/product_model.dart';
 import '../../product_details/view/products_details.dart';
-import '../pharmacy_categories_cubit/pharmacy_categories_cubit.dart';
+import '../manager/pharmacy_categories_cubit.dart';
 
 class PharmacyCategoriesPage extends StatelessWidget {
   final String tag;
@@ -90,22 +90,15 @@ class PharmacyCategoriesPage extends StatelessWidget {
                       children: (state is IsSearchingInMedicineInCategory
                               ? cubit.searchCategoryProducts
                               : cubit.categoryProducts)
-                          .asMap()
-                          .entries
                           .map((e) {
                         return ProductItem(
-                          tag: e.value.tag!,
-                          productImage: e.value.image!,
-                          productName: e.value.name!,
-                          productPrice: e.value.price!,
-                          productDescription: e.value.description!,
+                          product: e,
                           onTap: () {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
                                   builder: (builder) => ProductsDetails(
-                                    tag: e.value.tag!,
-                                    productsModel: e.value,
+                                    productsModel: e,
                                   ),
                                 ));
                           },

@@ -1,21 +1,14 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:ip_pharmacy_admin/models/product_model.dart';
 
 class ProductItem extends StatelessWidget {
-  final String tag;
-  final String productImage;
-  final String productName;
-  final String productPrice;
-  final String productDescription;
+  final ProductsModel product;
   final Function() onTap;
 
   const ProductItem({
     super.key,
-    required this.tag,
-    required this.productImage,
-    required this.productName,
-    required this.productPrice,
-    required this.productDescription,
+    required this.product,
     required this.onTap,
   });
 
@@ -26,7 +19,7 @@ class ProductItem extends StatelessWidget {
         onTap();
       },
       child: Hero(
-        tag: tag,
+        tag: product.tag!,
         child: Container(
           margin: const EdgeInsets.all(10),
           padding: const EdgeInsets.all(10),
@@ -47,7 +40,7 @@ class ProductItem extends StatelessWidget {
               Expanded(
                 child: CachedNetworkImage(
                   fit: BoxFit.fill,
-                  imageUrl: productImage,
+                  imageUrl: product.image!,
                   placeholder: (context, url) => const Center(
                     child: CircularProgressIndicator(),
                   ),
@@ -59,14 +52,14 @@ class ProductItem extends StatelessWidget {
                 ),
               ),
               Text(
-                productName,
+                product.name!,
                 style: Theme.of(context).textTheme.bodyLarge!.copyWith(
                       color: Colors.blueAccent,
                       fontWeight: FontWeight.bold,
                     ),
               ),
               Text(
-                '\$$productPrice',
+                '\$${product.price!}',
                 style: Theme.of(context).textTheme.bodyLarge!.copyWith(
                       fontWeight: FontWeight.bold,
                     ),
