@@ -1,7 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:ip_pharmacy_admin/feature/medicine/view/medicine_page.dart';
+import 'package:ip_pharmacy_admin/feature/authentication/view/login_page.dart';
 import 'package:ip_pharmacy_admin/firebase_options.dart';
 
 void main() async {
@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
             ),
           ),
         ),
-        home: const MedicinePage(),
+        home: const LoginPage(),
       ),
     );
   }

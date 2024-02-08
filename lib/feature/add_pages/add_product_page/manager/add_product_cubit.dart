@@ -9,6 +9,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:ip_pharmacy_admin/models/product_model.dart';
 
 import '../../../../models/category_model.dart';
+import '../../../../shared/utils/constants.dart';
 import '../../../../shared/utils/image_helper/image_helper.dart';
 
 part 'add_product_state.dart';
@@ -35,7 +36,7 @@ class AddProductCubit extends Cubit<AddProductState> {
     emit(GetAllCategoriesLoading());
     FirebaseFirestore.instance
         .collection('pharmacies')
-        .doc('2Cy9k9b8noU4Abj5Lgip')
+        .doc(Constants.pharmacyModel!.id)
         .snapshots()
         .listen((value) async {
       categories.clear();
@@ -64,7 +65,7 @@ class AddProductCubit extends Cubit<AddProductState> {
     if (categoryImage != null) {
       await FirebaseStorage.instance
           .ref()
-          .child('pharmacies/${'2Cy9k9b8noU4Abj5Lgip'}/products/${dropDownMenuItemValue}')
+          .child('pharmacies/${Constants.pharmacyModel!.id}/products/$dropDownMenuItemValue')
           .putFile(categoryImage!)
           .then((p0) async {
         await p0.ref.getDownloadURL().then((value) {
@@ -74,7 +75,7 @@ class AddProductCubit extends Cubit<AddProductState> {
     }
     var offerDoc = FirebaseFirestore.instance
         .collection('pharmacies')
-        .doc('2Cy9k9b8noU4Abj5Lgip')
+        .doc(Constants.pharmacyModel!.id)
         .collection('products')
         .doc();
 
@@ -82,7 +83,7 @@ class AddProductCubit extends Cubit<AddProductState> {
       tag: offerDoc.id,
       category: dropDownMenuItemValue,
       image: imageLink,
-      pharmacyId: '2Cy9k9b8noU4Abj5Lgip',
+      pharmacyId: Constants.pharmacyModel!.id,
       description: descriptionController.text,
       effectiveMaterial: effectiveMaterialController.text,
       name: productNameController.text,

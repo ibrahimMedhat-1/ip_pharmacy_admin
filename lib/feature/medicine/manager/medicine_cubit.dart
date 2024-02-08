@@ -5,6 +5,7 @@ import 'package:ip_pharmacy_admin/models/category_model.dart';
 
 import '../../../../models/product_model.dart';
 import '../../../models/offers_model.dart';
+import '../../../shared/utils/constants.dart';
 
 part 'medicine_state.dart';
 
@@ -24,7 +25,7 @@ class MedicineCubit extends Cubit<MedicineState> {
     emit(GetAllCategoriesLoading());
     FirebaseFirestore.instance
         .collection('pharmacies')
-        .doc('2Cy9k9b8noU4Abj5Lgip')
+        .doc(Constants.pharmacyModel!.id)
         .snapshots()
         .listen((value) async {
       categories.clear();
@@ -39,7 +40,7 @@ class MedicineCubit extends Cubit<MedicineState> {
     emit(GetAllMedicineProductsLoading());
     FirebaseFirestore.instance
         .collection('pharmacies')
-        .doc('2Cy9k9b8noU4Abj5Lgip')
+        .doc(Constants.pharmacyModel!.id)
         .collection('products')
         .snapshots()
         .listen((value) async {
@@ -56,7 +57,7 @@ class MedicineCubit extends Cubit<MedicineState> {
     emit(GetAllOffersLoading());
     await FirebaseFirestore.instance
         .collection('pharmacies')
-        .doc('2Cy9k9b8noU4Abj5Lgip')
+        .doc(Constants.pharmacyModel!.id)
         .collection('offers')
         .snapshots()
         .listen((value) async {

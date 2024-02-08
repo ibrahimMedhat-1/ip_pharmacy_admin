@@ -8,6 +8,7 @@ import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../../../../models/category_model.dart';
+import '../../../../shared/utils/constants.dart';
 import '../../../../shared/utils/image_helper/image_helper.dart';
 
 part 'add_category_state.dart';
@@ -31,7 +32,7 @@ class AddCategoryCubit extends Cubit<AddCategoryState> {
     emit(GetAllCategoriesLoading());
     FirebaseFirestore.instance
         .collection('pharmacies')
-        .doc('2Cy9k9b8noU4Abj5Lgip')
+        .doc(Constants.pharmacyModel!.id)
         .snapshots()
         .listen((value) async {
       categories.clear();
@@ -61,7 +62,7 @@ class AddCategoryCubit extends Cubit<AddCategoryState> {
     if (categoryImage != null) {
       await FirebaseStorage.instance
           .ref()
-          .child('pharmacies/${'2Cy9k9b8noU4Abj5Lgip'}/categories/$dropDownMenuItemValue')
+          .child('pharmacies/${Constants.pharmacyModel!.id}/categories/$dropDownMenuItemValue')
           .putFile(categoryImage!)
           .then((p0) async {
         await p0.ref.getDownloadURL().then((value) {
@@ -71,7 +72,7 @@ class AddCategoryCubit extends Cubit<AddCategoryState> {
     }
 
     DocumentReference<Map<String, dynamic>> pharmacy =
-        FirebaseFirestore.instance.collection('pharmacies').doc('2Cy9k9b8noU4Abj5Lgip');
+        FirebaseFirestore.instance.collection('pharmacies').doc(Constants.pharmacyModel!.id);
 
     await pharmacy.get().then((value) async {
       for (var category in await value.data()!['categories']) {

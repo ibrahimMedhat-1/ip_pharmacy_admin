@@ -41,17 +41,17 @@ class AuthCubit extends Cubit<AuthState> {
   Future<void> login(BuildContext context, VoidCallback onSuccess) async {
     emit(LoginLoading());
     await FirebaseAuth.instance
-        .signInWithEmailAndPassword(email: 'ibrahimmedhat112@gmail.com', password: '123456')
+        .signInWithEmailAndPassword(email: emailAddressController.text, password: passwordController.text)
         .then((value) async {
-      await getPharmacy(onSuccess);
+      await getPharmacy(onSuccess, value.user!.uid);
     }).catchError((onError) {
       emit(LoginError());
       Fluttertoast.showToast(msg: onError.message.toString());
     });
   }
 
-  Future<void> getPharmacy(VoidCallback onSuccess) async {
-    var pharmacy = FirebaseFirestore.instance.collection('pharmacies').doc('2Cy9k9b8noU4Abj5Lgip');
+  Future<void> getPharmacy(VoidCallback onSuccess, pharmacyId) async {
+    var pharmacy = FirebaseFirestore.instance.collection('pharmacies').doc(pharmacyId);
     var pharmacyData = await pharmacy.get();
 
     if (pharmacyData.data() != null) {
@@ -92,17 +92,6 @@ class AuthCubit extends Cubit<AuthState> {
       emit(ChangeObscure());
     } else {
       suffixIcon = Icons.visibility;
-      emit(ChangeObscure());
-    }
-  }
-
-  void suffixPressedSignUp() {
-    obscureSignUp = !obscureSignUp;
-    if (obscureSignUp) {
-      suffixIconSignUp = Icons.visibility_off;
-      emit(ChangeObscure());
-    } else {
-      suffixIconSignUp = Icons.visibility;
       emit(ChangeObscure());
     }
   }
