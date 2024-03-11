@@ -18,7 +18,7 @@ class AddOfferCubit extends Cubit<AddOfferState> {
 
   static AddOfferCubit get(context) => BlocProvider.of(context);
   File? categoryImage;
-  String dropDownMenuItemValue = 'Medicine';
+  String? dropDownMenuItemValue;
   List<CategoryModel> categories = [];
 
   void changeDropDownItem({

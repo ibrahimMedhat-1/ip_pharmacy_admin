@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ip_pharmacy_admin/feature/authentication/view/widgets/auth_button.dart';
+import 'package:ip_pharmacy_admin/layout/view/layout_view.dart';
 
-import '../../medicine/view/medicine_page.dart';
 import '../manager/auth_cubit.dart';
 import 'widgets/custom_text_form.dart';
 import 'widgets/welcome_widget.dart';
@@ -88,10 +88,8 @@ class LoginPage extends StatelessWidget {
                                       onTap: () async {
                                         if (formKey.currentState!.validate()) {
                                           await cubit.login(context, () {
-                                            Navigator.pushReplacement(
-                                                context,
-                                                MaterialPageRoute(
-                                                    builder: (builder) => const MedicinePage()));
+                                            Navigator.pushReplacement(context,
+                                                MaterialPageRoute(builder: (builder) => const LayoutView()));
                                           });
                                         }
                                       },

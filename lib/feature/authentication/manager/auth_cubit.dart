@@ -43,7 +43,11 @@ class AuthCubit extends Cubit<AuthState> {
     await FirebaseAuth.instance
         .signInWithEmailAndPassword(email: emailAddressController.text, password: passwordController.text)
         .then((value) async {
-      await getPharmacy(onSuccess, value.user!.uid);
+      var pharmacy = FirebaseFirestore.instance.collection('pharmacies').doc(value.user!.uid);
+      await pharmacy.get().then((value) {
+        Constants.pharmacyModel = PharmacyModel.fromJson(json: value.data());
+        onSuccess.call();
+      });
     }).catchError((onError) {
       emit(LoginError());
       Fluttertoast.showToast(msg: onError.message.toString());
@@ -61,12 +65,12 @@ class AuthCubit extends Cubit<AuthState> {
       for (var category in pharmacyData.data()!['categories']) {
         categories.add(CategoryModel.fromJson(category));
       }
-      await pharmacy.collection('products').get().then((value) {
+      pharmacy.collection('products').get().then((value) {
         for (var element in value.docs) {
           products.add(ProductsModel.fromJson(element.data()));
         }
       });
-      await pharmacy.collection('offers').get().then((value) {
+      pharmacy.collection('offers').get().then((value) {
         for (var element in value.docs) {
           offers.add(OffersModel.fromJson(element.data()));
         }

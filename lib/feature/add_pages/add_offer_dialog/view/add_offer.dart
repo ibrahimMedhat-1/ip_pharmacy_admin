@@ -84,6 +84,7 @@ class _AddOfferState extends State<AddOffer> with SingleTickerProviderStateMixin
                               DropdownButton(
                                 isExpanded: true,
                                 value: cubit.dropDownMenuItemValue,
+                                hint: const Text('Categories'),
                                 items: cubit.categories
                                     .asMap()
                                     .entries

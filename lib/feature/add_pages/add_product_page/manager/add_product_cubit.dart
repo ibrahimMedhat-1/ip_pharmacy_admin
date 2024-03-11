@@ -22,7 +22,7 @@ class AddProductCubit extends Cubit<AddProductState> {
   TextEditingController effectiveMaterialController = TextEditingController();
   TextEditingController priceController = TextEditingController();
   File? categoryImage;
-  String dropDownMenuItemValue = 'Medicine';
+  String? dropDownMenuItemValue;
   List<CategoryModel> categories = [];
 
   void changeDropDownItem({
@@ -89,6 +89,14 @@ class AddProductCubit extends Cubit<AddProductState> {
       name: productNameController.text,
       price: priceController.text,
     ).toMap());
+
+    FirebaseFirestore.instance.collection('allProducts').add({
+      'reference': FirebaseFirestore.instance
+          .collection('pharmacies')
+          .doc(Constants.pharmacyModel!.id)
+          .collection('products')
+          .doc(offerDoc.id),
+    });
     emit(AddProductSuccessfully());
   }
 }

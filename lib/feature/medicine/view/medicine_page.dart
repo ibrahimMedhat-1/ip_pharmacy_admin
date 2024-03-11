@@ -34,6 +34,7 @@ class MedicinePage extends StatelessWidget {
                   const SliverToBoxAdapter(
                     child: WelcomeWidget(welcomeText: 'Intelligent Pharmacy'),
                   ),
+                  const SliverToBoxAdapter(child: Text('Categories')),
                   SliverToBoxAdapter(
                     child: Row(
                       children: [
@@ -68,42 +69,43 @@ class MedicinePage extends StatelessWidget {
                       ],
                     ),
                   ),
+                  const SliverToBoxAdapter(child: Text('Offers')),
                   SliverToBoxAdapter(
                     child: state is GetAllOffersLoading
                         ? const Center(
                             child: CircularProgressIndicator(),
                           )
-                        : cubit.offers.isNotEmpty
-                            ? Row(
-                                children: [
-                                  Expanded(
-                                    child: CarouselSlider(
-                                      items: cubit.offers
-                                          .map(
-                                            (e) => CarouselItem(image: e.image ?? ''),
-                                          )
-                                          .toList(),
-                                      options: CarouselOptions(
-                                        autoPlay: true,
-                                        enlargeCenterPage: true,
-                                        enableInfiniteScroll: false,
-                                        reverse: true,
+                        : Row(
+                            children: [
+                              cubit.offers.isNotEmpty
+                                  ? Expanded(
+                                      child: CarouselSlider(
+                                        items: cubit.offers
+                                            .map(
+                                              (e) => CarouselItem(image: e.image ?? ''),
+                                            )
+                                            .toList(),
+                                        options: CarouselOptions(
+                                          autoPlay: true,
+                                          enlargeCenterPage: true,
+                                          enableInfiniteScroll: false,
+                                          reverse: true,
+                                        ),
                                       ),
-                                    ),
-                                  ),
-                                  MaterialButton(
-                                    shape: const CircleBorder(side: BorderSide(color: Colors.blue)),
-                                    onPressed: () {
-                                      showDialog(context: context, builder: (context) => const AddOffer());
-                                    },
-                                    child: const Icon(
-                                      Icons.add,
-                                      color: Colors.blue,
-                                    ),
-                                  )
-                                ],
+                                    )
+                                  : const SizedBox(),
+                              MaterialButton(
+                                shape: const CircleBorder(side: BorderSide(color: Colors.blue)),
+                                onPressed: () {
+                                  showDialog(context: context, builder: (context) => const AddOffer());
+                                },
+                                child: const Icon(
+                                  Icons.add,
+                                  color: Colors.blue,
+                                ),
                               )
-                            : const SizedBox(),
+                            ],
+                          ),
                   ),
                   SliverAppBar(
                     collapsedHeight: 80,

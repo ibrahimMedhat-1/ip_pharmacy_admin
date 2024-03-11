@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../shared/commone_widgets/drop_down_menu_item.dart';
 import '../manager/add_category_cubit.dart';
 
 class AddCategory extends StatefulWidget {
@@ -81,19 +80,8 @@ class _AddCategoryState extends State<AddCategory> with SingleTickerProviderStat
                                 'Category',
                                 style: Theme.of(context).textTheme.titleLarge,
                               ),
-                              DropdownButton(
-                                isExpanded: true,
-                                value: cubit.dropDownMenuItemValue,
-                                items: cubit.categories
-                                    .asMap()
-                                    .entries
-                                    .map(
-                                      (e) => dropDownItem(context, e.value.title!),
-                                    )
-                                    .toList(),
-                                onChanged: (value) {
-                                  cubit.changeDropDownItem(category: value);
-                                },
+                              TextFormField(
+                                controller: cubit.categoryController,
                               ),
                             ],
                           ),

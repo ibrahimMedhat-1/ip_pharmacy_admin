@@ -93,6 +93,7 @@ class _AddProductState extends State<AddProduct> with SingleTickerProviderStateM
                                 DropdownButton(
                                   isExpanded: true,
                                   value: cubit.dropDownMenuItemValue,
+                                  hint: const Text('categories'),
                                   items: cubit.categories
                                       .map(
                                         (e) => dropDownItem(context, e.title!),

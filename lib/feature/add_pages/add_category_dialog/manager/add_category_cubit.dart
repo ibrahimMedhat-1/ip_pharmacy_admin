@@ -19,6 +19,7 @@ class AddCategoryCubit extends Cubit<AddCategoryState> {
   static AddCategoryCubit get(context) => BlocProvider.of(context);
   File? categoryImage;
   String dropDownMenuItemValue = 'Medicine';
+  TextEditingController categoryController = TextEditingController();
   List<CategoryModel> categories = [];
 
   void changeDropDownItem({
@@ -78,12 +79,11 @@ class AddCategoryCubit extends Cubit<AddCategoryState> {
       for (var category in await value.data()!['categories']) {
         categories.add(category);
       }
-      categories.add({
-        'picture': imageLink,
-        'title': dropDownMenuItemValue,
-      });
     });
-
+    categories.add({
+      'picture': imageLink,
+      'title': categoryController.text,
+    });
     await pharmacy.update({'categories': categories});
     emit(AddCategorySuccessfully());
   }
