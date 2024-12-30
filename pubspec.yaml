@@ -45,7 +45,6 @@ dependencies:
   image_picker: ^1.0.4
   insurance_card_scanner:
   permission_handler:
-  credit_card_scanner:
   hive:
   sqflite:
   fluttertoast:
